@@ -26,7 +26,7 @@ std::vector<int> MakeCounts(size_t size, int rank_count) {
   return counts;
 }
 
-std::vector<int> MakeDispls(const std::vector<int>& counts) {
+std::vector<int> MakeDispls(const std::vector<int> &counts) {
   std::vector<int> displs(counts.size(), 0);
   for (size_t i = 1; i < counts.size(); ++i) {
     displs[i] = displs[i - 1] + counts[i - 1];
@@ -34,7 +34,7 @@ std::vector<int> MakeDispls(const std::vector<int>& counts) {
   return displs;
 }
 
-void SortLocal(std::vector<double>& data) {
+void SortLocal(std::vector<double> &data) {
   if (data.size() < 2) {
     return;
   }
@@ -66,8 +66,8 @@ void SortLocal(std::vector<double>& data) {
   data = std::move(parts.front());
 }
 
-std::vector<double> MergeGathered(const std::vector<double>& data, const std::vector<int>& counts,
-                                  const std::vector<int>& displs) {
+std::vector<double> MergeGathered(const std::vector<double> &data, const std::vector<int> &counts,
+                                  const std::vector<int> &displs) {
   std::vector<std::vector<double>> parts(counts.size());
   for (size_t rank = 0; rank < counts.size(); ++rank) {
     const auto begin = data.begin() + displs[rank];
@@ -93,7 +93,7 @@ std::vector<double> MergeGathered(const std::vector<double>& data, const std::ve
 
 }  // namespace
 
-EgashinKRadixSimpleMergeALL::EgashinKRadixSimpleMergeALL(const InType& in) {
+EgashinKRadixSimpleMergeALL::EgashinKRadixSimpleMergeALL(const InType &in) {
   SetTypeOfTask(GetStaticTypeOfTask());
   GetInput() = in;
   GetOutput() = {};

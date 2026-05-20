@@ -11,7 +11,7 @@ class EgashinKRadixSimpleMergeALL : public BaseTask {
     return ppc::task::TypeOfTask::kALL;
   }
 
-  explicit EgashinKRadixSimpleMergeALL(const InType& in);
+  explicit EgashinKRadixSimpleMergeALL(const InType &in);
 
  private:
   bool ValidationImpl() override;
