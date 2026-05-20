@@ -8,6 +8,7 @@
 #include <utility>
 #include <vector>
 
+#include "egashin_k_radix_simple_merge/common/include/common.hpp"
 #include "egashin_k_radix_simple_merge/common/include/radix_utils.hpp"
 #include "util/include/util.hpp"
 
