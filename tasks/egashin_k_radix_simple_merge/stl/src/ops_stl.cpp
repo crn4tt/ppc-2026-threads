@@ -11,7 +11,7 @@
 
 namespace egashin_k_radix_simple_merge {
 
-EgashinKRadixSimpleMergeSTL::EgashinKRadixSimpleMergeSTL(const InType& in) {
+EgashinKRadixSimpleMergeSTL::EgashinKRadixSimpleMergeSTL(const InType &in) {
   SetTypeOfTask(GetStaticTypeOfTask());
   GetInput() = in;
   GetOutput() = {};
@@ -41,7 +41,7 @@ bool EgashinKRadixSimpleMergeSTL::RunImpl() {
       radix_utils::SortRange(result_, ranges[index].first, ranges[index].second);
     });
   }
-  for (auto& thread : threads) {
+  for (auto &thread : threads) {
     thread.join();
   }
 
@@ -62,7 +62,7 @@ bool EgashinKRadixSimpleMergeSTL::RunImpl() {
         }
       });
     }
-    for (auto& thread : threads) {
+    for (auto &thread : threads) {
       thread.join();
     }
 

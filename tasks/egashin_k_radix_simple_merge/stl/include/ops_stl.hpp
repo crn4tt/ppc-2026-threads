@@ -11,7 +11,7 @@ class EgashinKRadixSimpleMergeSTL : public BaseTask {
     return ppc::task::TypeOfTask::kSTL;
   }
 
-  explicit EgashinKRadixSimpleMergeSTL(const InType& in);
+  explicit EgashinKRadixSimpleMergeSTL(const InType &in);
 
  private:
   bool ValidationImpl() override;
