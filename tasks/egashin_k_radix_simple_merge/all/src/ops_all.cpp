@@ -124,7 +124,7 @@ bool EgashinKRadixSimpleMergeALL::RunImpl() {
 
   std::vector<double> gathered;
   if (rank == 0) {
-    gathered.resize(result_.size());
+    gathered = result_;
   }
 
   MPI_Gatherv(local.data(), local_count, MPI_DOUBLE, gathered.data(), counts.data(), displs.data(), MPI_DOUBLE, 0,
