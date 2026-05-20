@@ -21,7 +21,8 @@ std::vector<int> MakeCounts(size_t size, int rank_count) {
   const size_t extra = size % static_cast<size_t>(rank_count);
 
   for (int rank = 0; rank < rank_count; ++rank) {
-    counts[static_cast<size_t>(rank)] = static_cast<int>(base + (static_cast<size_t>(rank) < extra ? 1 : 0));
+    const auto rank_index = static_cast<size_t>(rank);
+    counts[rank_index] = static_cast<int>(base + (std::cmp_less(rank, extra) ? size_t{1} : size_t{0}));
   }
   return counts;
 }
