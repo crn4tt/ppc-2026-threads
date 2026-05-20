@@ -7,6 +7,7 @@
 #include "egashin_k_radix_simple_merge/common/include/common.hpp"
 #include "egashin_k_radix_simple_merge/omp/include/ops_omp.hpp"
 #include "egashin_k_radix_simple_merge/seq/include/ops_seq.hpp"
+#include "egashin_k_radix_simple_merge/tbb/include/ops_tbb.hpp"
 #include "util/include/perf_test_util.hpp"
 
 namespace egashin_k_radix_simple_merge {
@@ -44,7 +45,8 @@ TEST_P(EgashinKRunPerfTestsThreads, RunPerfModes) {
 namespace {
 
 const auto kAllPerfTasks =
-    ppc::util::MakeAllPerfTasks<InType, EgashinKRadixSimpleMergeSEQ, EgashinKRadixSimpleMergeOMP>(
+    ppc::util::MakeAllPerfTasks<InType, EgashinKRadixSimpleMergeSEQ, EgashinKRadixSimpleMergeOMP,
+                                EgashinKRadixSimpleMergeTBB>(
         PPC_SETTINGS_egashin_k_radix_simple_merge);
 
 const auto kGtestValues = ppc::util::TupleToGTestValues(kAllPerfTasks);
