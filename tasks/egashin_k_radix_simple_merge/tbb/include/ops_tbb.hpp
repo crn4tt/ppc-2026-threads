@@ -11,7 +11,7 @@ class EgashinKRadixSimpleMergeTBB : public BaseTask {
     return ppc::task::TypeOfTask::kTBB;
   }
 
-  explicit EgashinKRadixSimpleMergeTBB(const InType& in);
+  explicit EgashinKRadixSimpleMergeTBB(const InType &in);
 
  private:
   bool ValidationImpl() override;

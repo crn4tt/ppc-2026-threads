@@ -14,7 +14,7 @@
 
 namespace egashin_k_radix_simple_merge {
 
-EgashinKRadixSimpleMergeTBB::EgashinKRadixSimpleMergeTBB(const InType& in) {
+EgashinKRadixSimpleMergeTBB::EgashinKRadixSimpleMergeTBB(const InType &in) {
   SetTypeOfTask(GetStaticTypeOfTask());
   GetInput() = in;
   GetOutput() = {};
@@ -39,11 +39,11 @@ bool EgashinKRadixSimpleMergeTBB::RunImpl() {
 
   const auto ranges = radix_utils::MakeRanges(result_.size(), workers);
   oneapi::tbb::parallel_for(oneapi::tbb::blocked_range<size_t>(0, ranges.size()),
-                            [&](const oneapi::tbb::blocked_range<size_t>& range) {
-                              for (size_t i = range.begin(); i != range.end(); ++i) {
-                                radix_utils::SortRange(result_, ranges[i].first, ranges[i].second);
-                              }
-                            });
+                            [&](const oneapi::tbb::blocked_range<size_t> &range) {
+    for (size_t i = range.begin(); i != range.end(); ++i) {
+      radix_utils::SortRange(result_, ranges[i].first, ranges[i].second);
+    }
+  });
 
   auto parts = radix_utils::MakeParts(result_, ranges);
   while (parts.size() > 1) {
@@ -51,11 +51,11 @@ bool EgashinKRadixSimpleMergeTBB::RunImpl() {
     std::vector<std::vector<double>> next((parts.size() + 1) / 2);
 
     oneapi::tbb::parallel_for(oneapi::tbb::blocked_range<size_t>(0, pair_count),
-                              [&](const oneapi::tbb::blocked_range<size_t>& range) {
-                                for (size_t i = range.begin(); i != range.end(); ++i) {
-                                  next[i] = radix_utils::Merge(parts[2 * i], parts[(2 * i) + 1]);
-                                }
-                              });
+                              [&](const oneapi::tbb::blocked_range<size_t> &range) {
+      for (size_t i = range.begin(); i != range.end(); ++i) {
+        next[i] = radix_utils::Merge(parts[2 * i], parts[(2 * i) + 1]);
+      }
+    });
 
     if (parts.size() % 2 != 0) {
       next.back() = std::move(parts.back());

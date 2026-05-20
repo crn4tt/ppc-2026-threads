@@ -46,8 +46,7 @@ namespace {
 
 const auto kAllPerfTasks =
     ppc::util::MakeAllPerfTasks<InType, EgashinKRadixSimpleMergeSEQ, EgashinKRadixSimpleMergeOMP,
-                                EgashinKRadixSimpleMergeTBB>(
-        PPC_SETTINGS_egashin_k_radix_simple_merge);
+                                EgashinKRadixSimpleMergeTBB>(PPC_SETTINGS_egashin_k_radix_simple_merge);
 
 const auto kGtestValues = ppc::util::TupleToGTestValues(kAllPerfTasks);
 
