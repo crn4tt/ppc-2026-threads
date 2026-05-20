@@ -32,17 +32,17 @@ inline void CountingPass(const std::vector<uint64_t>& source, std::vector<uint64
 
   for (uint64_t value : source) {
     const auto byte = static_cast<uint8_t>((value >> (byte_index * 8)) & 0xFFU);
-    count[byte]++;
+    count.at(byte)++;
   }
 
   std::array<size_t, 256> position{};
   for (size_t i = 1; i < count.size(); ++i) {
-    position[i] = position[i - 1] + count[i - 1];
+    position.at(i) = position.at(i - 1) + count.at(i - 1);
   }
 
   for (uint64_t value : source) {
     const auto byte = static_cast<uint8_t>((value >> (byte_index * 8)) & 0xFFU);
-    destination[position[byte]++] = value;
+    destination[position.at(byte)++] = value;
   }
 }
 
@@ -52,15 +52,12 @@ inline int WorkerCount(size_t size, int requested) {
   if (size == 0) {
     return 1;
   }
-  if (requested < 1) {
-    requested = 1;
-  }
-  return std::min(requested, static_cast<int>(size));
+  return std::min(std::max(requested, 1), static_cast<int>(size));
 }
 
 inline std::vector<std::pair<size_t, size_t>> MakeRanges(size_t size, int workers) {
   std::vector<std::pair<size_t, size_t>> ranges(static_cast<size_t>(workers));
-  const size_t worker_count = static_cast<size_t>(workers);
+  const auto worker_count = static_cast<size_t>(workers);
   const size_t base = size / worker_count;
   const size_t extra = size % worker_count;
 

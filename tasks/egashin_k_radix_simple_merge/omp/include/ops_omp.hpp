@@ -1,7 +1,5 @@
 #pragma once
 
-#include <vector>
-
 #include "egashin_k_radix_simple_merge/common/include/common.hpp"
 #include "task/include/task.hpp"
 
