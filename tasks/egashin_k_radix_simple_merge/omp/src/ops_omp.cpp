@@ -10,7 +10,7 @@
 
 namespace egashin_k_radix_simple_merge {
 
-EgashinKRadixSimpleMergeOMP::EgashinKRadixSimpleMergeOMP(const InType& in) {
+EgashinKRadixSimpleMergeOMP::EgashinKRadixSimpleMergeOMP(const InType &in) {
   SetTypeOfTask(GetStaticTypeOfTask());
   GetInput() = in;
   GetOutput() = {};

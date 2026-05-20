@@ -27,7 +27,7 @@ inline double FromSortable(uint64_t key) {
   return value;
 }
 
-inline void CountingPass(const std::vector<uint64_t>& source, std::vector<uint64_t>& destination, int byte_index) {
+inline void CountingPass(const std::vector<uint64_t> &source, std::vector<uint64_t> &destination, int byte_index) {
   std::array<size_t, 256> count{};
 
   for (uint64_t value : source) {
@@ -71,7 +71,7 @@ inline std::vector<std::pair<size_t, size_t>> MakeRanges(size_t size, int worker
   return ranges;
 }
 
-inline void SortRange(std::vector<double>& data, size_t left, size_t right) {
+inline void SortRange(std::vector<double> &data, size_t left, size_t right) {
   if (right - left < 2) {
     return;
   }
@@ -84,8 +84,8 @@ inline void SortRange(std::vector<double>& data, size_t left, size_t right) {
     keys[i] = detail::ToSortable(data[left + i]);
   }
 
-  auto* source = &keys;
-  auto* destination = &buffer;
+  auto *source = &keys;
+  auto *destination = &buffer;
   for (int byte_index = 0; byte_index < 8; ++byte_index) {
     detail::CountingPass(*source, *destination, byte_index);
     std::swap(source, destination);
@@ -96,7 +96,7 @@ inline void SortRange(std::vector<double>& data, size_t left, size_t right) {
   }
 }
 
-inline std::vector<double> Merge(const std::vector<double>& left, const std::vector<double>& right) {
+inline std::vector<double> Merge(const std::vector<double> &left, const std::vector<double> &right) {
   std::vector<double> result;
   result.reserve(left.size() + right.size());
 
@@ -115,8 +115,8 @@ inline std::vector<double> Merge(const std::vector<double>& left, const std::vec
   return result;
 }
 
-inline std::vector<std::vector<double>> MakeParts(const std::vector<double>& data,
-                                                  const std::vector<std::pair<size_t, size_t>>& ranges) {
+inline std::vector<std::vector<double>> MakeParts(const std::vector<double> &data,
+                                                  const std::vector<std::pair<size_t, size_t>> &ranges) {
   std::vector<std::vector<double>> parts(ranges.size());
   for (size_t i = 0; i < ranges.size(); ++i) {
     parts[i] = std::vector<double>(data.begin() + static_cast<std::ptrdiff_t>(ranges[i].first),

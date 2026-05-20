@@ -11,7 +11,7 @@ class EgashinKRadixSimpleMergeOMP : public BaseTask {
     return ppc::task::TypeOfTask::kOMP;
   }
 
-  explicit EgashinKRadixSimpleMergeOMP(const InType& in);
+  explicit EgashinKRadixSimpleMergeOMP(const InType &in);
 
  private:
   bool ValidationImpl() override;
