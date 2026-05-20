@@ -32,10 +32,11 @@ bool EgashinKRadixSimpleMergeOMP::RunImpl() {
 
   int workers = radix_utils::WorkerCount(result_.size(), ppc::util::GetNumThreads());
   auto ranges = radix_utils::MakeRanges(result_.size(), workers);
+  auto &result = result_;
 
-#pragma omp parallel for default(none) shared(result_, ranges, workers) num_threads(workers) schedule(static)
+#pragma omp parallel for default(none) shared(result, ranges, workers) num_threads(workers) schedule(static)
   for (int i = 0; i < workers; ++i) {
-    radix_utils::SortRange(result_, ranges[static_cast<size_t>(i)].first, ranges[static_cast<size_t>(i)].second);
+    radix_utils::SortRange(result, ranges[static_cast<size_t>(i)].first, ranges[static_cast<size_t>(i)].second);
   }
 
   auto parts = radix_utils::MakeParts(result_, ranges);
